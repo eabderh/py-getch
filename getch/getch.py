@@ -1,6 +1,11 @@
-try:
-    from msvcrt import getch
-except ImportError:
+import os
+if os.name is 'nt':
+    try:
+        from msvcrt import getch
+    except ImportError:
+        print('Missing package for assumed windows platform: msvcrt')
+        raise
+elif os.name is 'posix':
     def getch():
         """
         Gets a single character from STDIO.

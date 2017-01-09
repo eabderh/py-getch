@@ -11,7 +11,8 @@ def pause(message='Press any key to continue . . . '):
     if message is not None:
         print(message, end='')
         sys.stdout.flush()
-    getch()
+    if getch() == '\x03':
+        raise KeyboardInterrupt
     print()
 
 

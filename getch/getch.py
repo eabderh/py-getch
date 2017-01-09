@@ -14,9 +14,11 @@ elif os.name is 'posix':
         import tty
         import termios
         fd = sys.stdin.fileno()
-        old = termios.tcgetattr(fd)
+        old = termios.tcgetattr(fd) # save termios settings
         try:
+            # set termios settings to turn off echo, newlines, etc..
             tty.setraw(fd)
             return sys.stdin.read(1)
         finally:
+            # restore termios settings
             termios.tcsetattr(fd, termios.TCSADRAIN, old)

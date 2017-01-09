@@ -12,6 +12,8 @@ def pause(message='Press any key to continue . . . '):
         print(message, end='')
         sys.stdout.flush()
     ch = getch()
+    # chech for CTRL-C (0x03) code and handle it with an error
+    # check for b'\x03' because windows getch returns a 'bytes' string literal
     if ch is '\x03' or ch is b'\x03':
         raise KeyboardInterrupt
     print()
